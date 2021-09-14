@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="./registro.xsl"?>
+<?xml-stylesheet type="text/xsl" href="./registro_facturas_grupo08.xsl"?>
 
 <!-- grupo 08  -->
 <registro periodo="2012-03">
@@ -47,10 +47,11 @@
         </cliente>
         <direccion depto="La Libertad" municipio="Antiguo Cuscatlan">
             <oficina>5 Av. Sur</oficina>
-        </direccion> 
+        </direccion>
         <lineafactura factura="570">
             <codigo tipo="pcportatiles">734</codigo>
-            <detalle>netbook acer a240</detalle>y
+            <detalle>netbook acer a240</detalle>
+            y
             <cantidad>3</cantidad>
             <precio>
                 <moneda>$</moneda>
