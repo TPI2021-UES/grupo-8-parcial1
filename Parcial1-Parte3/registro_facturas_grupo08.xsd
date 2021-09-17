@@ -37,9 +37,9 @@
                         <xs:element name = "telefono">
                             <xs:complexType>
                                 <xs:simpleContent>
-                                    <xs:extension base = "xs:string">
+                                    <xs:extension base = "tipotel">
                                         <xs:attribute name = "tipo" type = "tipotelefono"/>
-                                        <xs:attribute name = "cia" type = "xs:string" use= "optional" />
+                                        <xs:attribute name = "cia" type = "tipocia" use= "optional" />
                                     </xs:extension>
                                 </xs:simpleContent>
                             </xs:complexType>
@@ -68,7 +68,7 @@
                             </xs:complexType>
                         </xs:element>
                         <xs:element name = "detalle" type = "xs:string"/>
-                        <xs:element name = "cantidad" type = "xs:integer" />
+                        <xs:element name = "cantidad" type = "tipocantidad" />
                         <xs:element name = "precio" type = "valor" />
                         <xs:element name = "subtotal" type = "valor" />
                     </xs:sequence>
@@ -100,7 +100,7 @@
                 <xs:element name = "dui">
                     <xs:complexType>
                         <xs:simpleContent>
-                            <xs:extension base = "xs:string">
+                            <xs:extension base = "tipodui">
                                 <xs:attribute name = "vence" type = "xs:date" />
                             </xs:extension>
                         </xs:simpleContent>
@@ -125,6 +125,25 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name = "tipodui">
+        <xs:restriction base = "xs:string">
+            <xs:pattern value = "[0-9]{8}-[0-9]{1}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name = "tipocantidad">
+        <xs:restriction base = "xs:integer">
+            <xs:minInclusive value = "1" />
+            <xs:maxInclusive value = "50" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name = "tipotel">
+        <xs:restriction base = "xs:integer">
+            <xs:pattern value = "7[0-9]{7}|2[0-9]{7}" />
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name = "tipoproducto">
         <xs:restriction base = "xs:string">
             <xs:enumeration value = "souvenir" />
@@ -132,6 +151,12 @@
             <xs:enumeration value = "accesorio_pc" />
             <xs:enumeration value = "perecedero" />
             <xs:enumeration value = "perecedero" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name = "tipocia">
+        <xs:restriction base = "xs:string">
+            <xs:pattern value = "movistar|tigo|claro|digicel"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

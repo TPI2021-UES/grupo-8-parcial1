@@ -7,7 +7,7 @@
         <cliente codigo="2617" sexo="femenino">
             <nombre>Maria Velez</nombre>
             <documento>
-                <dui vence="2018-03-03">02349867-9 </dui>
+                <dui vence="2018-03-03">02349867-9</dui>
             </documento>
             <telefono tipo="fijo">24356789</telefono>
             <email>mariav@gmail.com</email>
