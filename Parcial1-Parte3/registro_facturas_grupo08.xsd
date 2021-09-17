@@ -78,11 +78,10 @@
         </xs:sequence>
     </xs:group>
 
-
     <xs:complexType name = "valor">
         <xs:sequence>
-            <xs:element name = "moneda" type = "xs:string"/>
-            <xs:element name = "valor" type = "xs:decimal"/>
+            <xs:element name = "moneda" type = "tipodinero"/>
+            <xs:element name = "valor" type = "tipodinero"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -157,6 +156,16 @@
     <xs:simpleType name = "tipocia">
         <xs:restriction base = "xs:string">
             <xs:pattern value = "movistar|tigo|claro|digicel"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Tipo para dinero -->
+    <xs:simpleType name="tipodinero">
+        <xs:restriction base="xs:decimal">
+        <xs:minInclusive value="0.01"></xs:minInclusive>
+        <xs:maxInclusive value="999.99"></xs:maxInclusive>
+        <xs:totalDigits value="5"></xs:totalDigits>
+        <xs:fractionDigits value="2"></xs:fractionDigits>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
