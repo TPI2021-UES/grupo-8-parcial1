@@ -1,0 +1,137 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name = "registro">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name = "responsable" type = "xs:string"/>
+                <xs:group ref = "groupFactura" maxOccurs = "unbounded"/>
+            </xs:sequence>
+        <xs:attribute name = "periodo" type = "xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:group name = "groupFactura">
+        <xs:sequence>
+            <xs:element name = "factura">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name = "num" type = "xs:integer" />
+                        <xs:group ref = "groupCliente" />
+                        <xs:element name = "direccion" type = "tipodireccion" minOccurs = "0" maxOccurs = "1"/>
+                        <xs:group ref = "groupLineaFactura" maxOccurs = "unbounded"/>
+                        <xs:element name = "total" type = "valor" />
+                    </xs:sequence>
+                    <xs:attribute name = "tipo" type = "xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:group name = "groupCliente" >
+        <xs:sequence>
+            <xs:element name = "cliente">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name = "nombre" type = "xs:string"/>
+                        <xs:element name = "documento" type ="tipodocumento" />
+                        <xs:element name = "telefono">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base = "xs:string">
+                                        <xs:attribute name = "tipo" type = "tipotelefono"/>
+                                        <xs:attribute name = "cia" type = "xs:string" use= "optional" />
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "email" type = "xs:string" />
+                    </xs:sequence>
+                    <xs:attribute name = "codigo" type = "xs:string" />
+                    <xs:attribute name = "sexo" type = "xs:string" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:group name = "groupLineaFactura">
+        <xs:sequence>
+            <xs:element name = "lineafactura">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name = "codigo">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base = "xs:integer">
+                                        <xs:attribute name = "tipo" type = "tipoproducto" />
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "detalle" type = "xs:string"/>
+                        <xs:element name = "cantidad" type = "xs:integer" />
+                        <xs:element name = "precio" type = "valor" />
+                        <xs:element name = "subtotal" type = "valor" />
+                    </xs:sequence>
+                    <xs:attribute name = "factura" type = "xs:integer"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+
+
+    <xs:complexType name = "valor">
+        <xs:sequence>
+            <xs:element name = "moneda" type = "xs:string"/>
+            <xs:element name = "valor" type = "xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name = "tipodireccion">
+        <xs:choice>
+            <xs:element name = "casa" type = "xs:string" />
+            <xs:element name = "oficina" type = "xs:string" />
+        </xs:choice>
+        <xs:attribute name = "depto" type = "xs:string" />
+        <xs:attribute name = "municipio" type = "xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name = "tipodocumento">
+        <xs:choice>
+                <xs:element name = "dui">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base = "xs:string">
+                                <xs:attribute name = "vence" type = "xs:date" />
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name = "pasaporte">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base = "xs:string">
+                                <xs:attribute name = "pais" type = "xs:string" />
+                            </xs:extension>
+                        </xs:simpleContent >
+                    </xs:complexType>
+                </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name = "tipotelefono">
+        <xs:restriction base = "xs:string">
+            <xs:enumeration value = "fijo" />
+            <xs:enumeration value = "celular" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name = "tipoproducto">
+        <xs:restriction base = "xs:string">
+            <xs:enumeration value = "souvenir" />
+            <xs:enumeration value = "pcportatiles" />
+            <xs:enumeration value = "accesorio_pc" />
+            <xs:enumeration value = "perecedero" />
+            <xs:enumeration value = "perecedero" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
